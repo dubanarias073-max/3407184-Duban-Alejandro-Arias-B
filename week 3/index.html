@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>⚰️ Sistema de Gestión de Cementerios</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-container">
+
+      <!-- Header -->
+      <header class="header">
+        <h1>⚰️ Cemetery Management System</h1>
+        <p class="subtitle">Gestión de Espacios Funerarios y Usuarios</p>
+      </header>
+
+      <!-- Navigation Tabs -->
+      <nav class="tabs">
+        <button class="tab-btn active" data-tab="catalog">
+          🪦 Espacios Funerarios
+        </button>
+        <button class="tab-btn" data-tab="users">
+          👥 Usuarios
+        </button>
+        <button class="tab-btn" data-tab="transactions">
+          📜 Registros de Sepultura
+        </button>
+        <button class="tab-btn" data-tab="stats">
+          📊 Estadísticas
+        </button>
+      </nav>
+
+      <!-- Tab Content -->
+      <main class="tab-content">
+
+        <!-- ===================== CATALOG ===================== -->
+        <section id="catalog" class="tab-panel active">
+          <div class="panel-header">
+            <h2>🪦 Catálogo de Espacios Funerarios</h2>
+            <div class="actions">
+              <input
+                type="text"
+                id="search-input"
+                placeholder="Buscar por nombre..."
+              />
+
+              <select id="filter-type">
+                <option value="all">Todos los tipos</option>
+                <option value="Grave">Tumbas</option>
+                <option value="Mausoleum">Mausoleos</option>
+                <option value="Columbarium">Columbarios</option>
+              </select>
+
+              <select id="filter-status">
+                <option value="all">Todos</option>
+                <option value="active">Disponibles</option>
+                <option value="inactive">No disponibles</option>
+              </select>
+
+              <button id="add-item-btn" class="btn btn-primary">
+                + Agregar Espacio
+              </button>
+            </div>
+          </div>
+
+          <div id="item-list" class="items-grid"></div>
+
+          <div id="empty-state" class="empty-state" style="display: none;">
+            <p>📭 No hay espacios registrados</p>
+            <p class="hint">Agrega el primer espacio funerario</p>
+          </div>
+        </section>
+
+        <!-- ===================== USERS ===================== -->
+        <section id="users" class="tab-panel">
+          <div class="panel-header">
+            <h2>👥 Usuarios del Cementerio</h2>
+            <div class="actions">
+              <input
+                type="text"
+                id="search-users"
+                placeholder="Buscar usuario..."
+              />
+
+              <select id="filter-role">
+                <option value="all">Todos los roles</option>
+                <option value="Administrator">Administradores</option>
+                <option value="Visitor">Visitantes</option>
+              </select>
+
+              <button id="add-user-btn" class="btn btn-primary">
+                + Agregar Usuario
+              </button>
+            </div>
+          </div>
+
+          <div id="user-list" class="users-grid"></div>
+        </section>
+
+        <!-- ===================== TRANSACTIONS ===================== -->
+        <section id="transactions" class="tab-panel">
+          <div class="panel-header">
+            <h2>📜 Historial de Registros de Sepultura</h2>
+          </div>
+          <div id="transaction-list" class="transactions-list"></div>
+        </section>
+
+        <!-- ===================== STATS ===================== -->
+        <section id="stats" class="tab-panel">
+          <div class="panel-header">
+            <h2>📊 Estadísticas del Sistema</h2>
+          </div>
+
+          <div id="stats-container" class="stats-grid">
+            <div class="stat-card">
+              <span class="stat-value" id="stat-total">0</span>
+              <span class="stat-label">Total Espacios</span>
+            </div>
+            <div class="stat-card">
+              <span class="stat-value" id="stat-active">0</span>
+              <span class="stat-label">Disponibles</span>
+            </div>
+            <div class="stat-card">
+              <span class="stat-value" id="stat-inactive">0</span>
+              <span class="stat-label">No Disponibles</span>
+            </div>
+            <div class="stat-card">
+              <span class="stat-value" id="stat-users">0</span>
+              <span class="stat-label">Usuarios</span>
+            </div>
+          </div>
+
+          <div id="stats-details" class="stats-details"></div>
+        </section>
+
+      </main>
+
+      <!-- ===================== MODAL ITEM ===================== -->
+      <div id="item-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3 id="modal-title">Agregar Espacio Funerario</h3>
+            <button class="close-btn" id="close-modal">&times;</button>
+          </div>
+
+          <form id="item-form" class="modal-form">
+            <div class="form-group">
+              <label for="item-type">Tipo de Espacio</label>
+              <select id="item-type" required>
+                <option value="">Selecciona un tipo</option>
+                <option value="Grave">Tumba</option>
+                <option value="Mausoleum">Mausoleo</option>
+                <option value="Columbarium">Columbario</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="item-name">Nombre *</label>
+              <input type="text" id="item-name" required />
+            </div>
+
+            <div class="form-group">
+              <label for="item-location">Ubicación *</label>
+              <input type="text" id="item-location" required />
+            </div>
+
+            <!-- Campos dinámicos -->
+            <div id="dynamic-fields"></div>
+
+            <div class="form-actions">
+              <button type="submit" class="btn btn-primary">Guardar</button>
+              <button type="button" class="btn btn-secondary" id="cancel-btn">
+                Cancelar
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- ===================== MODAL USER ===================== -->
+      <div id="user-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3>Agregar Usuario</h3>
+            <button class="close-btn" id="close-user-modal">&times;</button>
+          </div>
+
+          <form id="user-form" class="modal-form">
+            <div class="form-group">
+              <label for="user-role">Rol</label>
+              <select id="user-role" required>
+                <option value="">Selecciona un rol</option>
+                <option value="Administrator">Administrador</option>
+                <option value="Visitor">Visitante</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="user-name">Nombre *</label>
+              <input type="text" id="user-name" required />
+            </div>
+
+            <div class="form-group">
+              <label for="user-email">Email *</label>
+              <input type="email" id="user-email" required />
+            </div>
+
+            <div class="form-actions">
+              <button type="submit" class="btn btn-primary">Guardar</button>
+              <button type="button" class="btn btn-secondary" id="cancel-user-btn">
+                Cancelar
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+    </div>
+
+    <script src="starter/script.js"></script>
+  </body>
+</html>
