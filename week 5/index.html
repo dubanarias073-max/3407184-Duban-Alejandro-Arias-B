@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard - Sistema de Gestión de Cementerios</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <header class="header">
+    <h1>⚰️ Sistema de Gestión de Cementerios</h1>
+    <p>Dashboard de Análisis de Servicios Funerarios</p>
+  </header>
+
+  <!-- ========================= -->
+  <!-- ESTADÍSTICAS GENERALES -->
+  <!-- ========================= -->
+  <section class="stats-section">
+    <div class="stat-card">
+      <h3>Total Ingresos</h3>
+      <p id="total-sales">$0</p>
+    </div>
+
+    <div class="stat-card">
+      <h3>Total Servicios</h3>
+      <p id="total-orders">0</p>
+    </div>
+
+    <div class="stat-card">
+      <h3>Promedio por Servicio</h3>
+      <p id="avg-order">$0</p>
+    </div>
+
+    <div class="stat-card">
+      <h3>Total Ítems Vendidos</h3>
+      <p id="total-items">0</p>
+    </div>
+  </section>
+
+  <!-- ========================= -->
+  <!-- GRID PRINCIPAL -->
+  <!-- ========================= -->
+  <section class="dashboard-grid">
+
+    <!-- Top Clientes -->
+    <div class="card">
+      <h2>🏆 Top Clientes</h2>
+      <div id="top-customers" class="list-container">
+        <p class="loading">Cargando...</p>
+      </div>
+    </div>
+
+    <!-- Ingresos por Región -->
+    <div class="card">
+      <h2>🌍 Ingresos por Región</h2>
+      <div id="sales-by-region" class="list-container">
+        <p class="loading">Cargando...</p>
+      </div>
+    </div>
+
+    <!-- Ingresos por Categoría -->
+    <div class="card">
+      <h2>🪦 Servicios por Categoría</h2>
+      <div id="sales-by-category" class="list-container">
+        <p class="loading">Cargando...</p>
+      </div>
+    </div>
+
+    <!-- Servicios Más Solicitados -->
+    <div class="card">
+      <h2>📈 Servicios Más Solicitados</h2>
+      <div id="top-products" class="list-container">
+        <p class="loading">Cargando...</p>
+      </div>
+    </div>
+
+    <!-- Tendencia Mensual -->
+    <div class="card full-width">
+      <h2>📊 Tendencia Mensual de Ingresos</h2>
+      <div id="monthly-trend" class="trend-container">
+        <p class="loading">Cargando...</p>
+      </div>
+    </div>
+
+    <!-- Servicios Recientes -->
+    <div class="card full-width">
+      <h2>🗂 Servicios Recientes</h2>
+      <div id="recent-orders">
+        <p class="loading">Cargando...</p>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ========================= -->
+  <!-- FOOTER -->
+  <!-- ========================= -->
+  <footer class="footer">
+    <p>© 2024 Sistema de Gestión de Cementerios | Dashboard Analítico</p>
+  </footer>
+
+<script src="starter/script.js"></script>
+</body>
+</html>
